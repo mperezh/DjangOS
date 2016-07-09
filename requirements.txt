@@ -1,4 +1,4 @@
-Django==1.9.7
+django==1.9.7
 django-widget-tweaks==1.4.1
 mongoengine==0.10.6
 pymongo==3.2.2
