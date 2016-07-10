@@ -9,7 +9,7 @@ window.onresize = function (event) { resizeDiv(); }
 
 function resizeDiv() {
     //vpw = $(window).width();
-    vph = $(window).height();
+    var vph = $(window).height();
     vph = vph - $('.mdl-mini-footer').outerHeight()
     $('#desktop').css({'height':vph + 'px'});
     $('#desktop-background').css({'height':vph + 'px'});
