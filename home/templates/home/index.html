@@ -13,7 +13,21 @@
 
                 <footer class="mdl-mini-footer">
                     <div class="mdl-mini-footer__left-section">
-                        <div class="mdl-logo"><i class="material-icons">apps</i></div>
+                        <div class="mdl-logo">
+                            <button class="mdl-button mdl-js-button mdl-button--icon">
+                                <i class="material-icons">apps</i>
+                            </button>
+                        </div>
+                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">folder</i>
+                        </button>
+                        <!--<button class="mdl-button mdl-js-button mdl-button--icon">
+                            <<i class="material-icons">public</i>
+                        </button>-->
+
+                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="fa fa-chrome "></i>
+                        </button>
 
                     </div>
                     <div class="mdl-mini-footer__right-section">
@@ -32,18 +46,77 @@
                     </div>
                     <!-- Tabs -->
                     <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                        <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Tab 1</a>
-                        <a href="#fixed-tab-2" class="mdl-layout__tab">Tab 2</a>
-                        <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
+                        <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Recursos</a>
+                        <a href="#fixed-tab-2" class="mdl-layout__tab">Procesos</a>
+                        <a href="#fixed-tab-3" class="mdl-layout__tab">I/O</a>
                     </div>
                 </header>
 
                 <main class="mdl-layout__content">
                     <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-                        <div class="page-content"><!-- Your content goes here --></div>
+                        <div class="page-content">
+                            <!-- Two Line List with secondary info and action -->
+                            <style>
+                                .demo-list-two {
+                                    width: 300px;
+                                }
+                            </style>
+
+                            <ul class="demo-list-two mdl-list">
+                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-avatar">memory</i>
+                                        <span>CPU</span>
+                                        <span class="mdl-list__item-sub-title">50%</span>
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-avatar">developer_board</i>
+                                        <span>Memoria</span>
+                                        <span class="mdl-list__item-sub-title">10%</span>
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item mdl-list__item--two-line">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-avatar">storage</i>
+                                        <span>Disco</span>
+                                        <span class="mdl-list__item-sub-title">5%</span>
+                                    </span>
+                                </li>
+
+                            </ul>
+                        </div>
                     </section>
                     <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-                        <div class="page-content"><!-- Your content goes here --></div>
+                        <div class="page-content">
+                            <div class="panel panel-default process">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Proceso</th>
+                                        <th>Porcentaje</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                <div class="div-table-content">
+                                    <table class="table table-condensed">
+                                        <tbody>
+                                        <tr>
+                                            <td>Proceso 1</td>
+                                            <td>20%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Proceso 2</td>
+                                            <td>30%</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </section>
                     <section class="mdl-layout__tab-panel" id="fixed-tab-3">
                         <div class="page-content"><!-- Your content goes here --></div>

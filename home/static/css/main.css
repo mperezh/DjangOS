@@ -166,6 +166,24 @@ nav a:hover {
 .mdl-logo { line-height: 0 !important;}
 .mdl-layout__header-row { padding: 0 40px 0 20px !important;}
 .mdl-layout__container { position: inherit !important; }
+ul#apps { margin: 0 !important; line-height: 0 !important; }
+.process { margin-top: 20px; }
+table {
+    table-layout:fixed;
+}
+
+.div-table-content {
+  height:100%;
+  overflow-y:auto;
+}
+
+.mdl-list__item-avatar{
+    border-radius: 0 !important;
+}
+
+.mdl-button{
+    border-radius: 0 !important;
+}
 
 /* ==========================================================================
    Media Queries
