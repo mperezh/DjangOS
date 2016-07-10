@@ -154,19 +154,18 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
+.custom-grid { padding: 0 !important;}
+.desktop-cell { margin: 0 !important;}
+#desktop-background {
+    background-size:100%;
+    width: 100%;
+    background: url("../img/background1.png") no-repeat;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.mdl-mini-footer { padding: 10px 16px; }
+.mdl-logo { line-height: 0 !important;}
+.mdl-layout__header-row { padding: 0 40px 0 20px !important;}
+.mdl-layout__container { position: inherit !important; }
 
 /* ==========================================================================
    Media Queries
@@ -371,3 +370,4 @@ nav a:hover {
         page-break-after: avoid;
     }
 }
+
