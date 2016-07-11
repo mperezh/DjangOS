@@ -162,7 +162,7 @@ nav a:hover {
     background: url("../img/background1.png") no-repeat;
 }
 
-.mdl-mini-footer { padding: 10px 16px; }
+.mdl-mini-footer { padding: 5px 16px; }
 .mdl-logo { line-height: 0 !important;}
 .mdl-layout__header-row { padding: 0 40px 0 20px !important;}
 .mdl-layout__container { position: inherit !important; }
@@ -177,13 +177,9 @@ table {
   overflow-y:auto;
 }
 
-.mdl-list__item-avatar{
-    border-radius: 0 !important;
-}
+.mdl-list__item-avatar{ border-radius: 0 !important; }
 
-.mdl-button{
-    border-radius: 0 !important;
-}
+.mdl-button{ border-radius: 0 !important; }
 
 /* ==========================================================================
    Media Queries

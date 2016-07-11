@@ -40,4 +40,4 @@ function startTime() {
 }
 
 startTime();
-date();
+//date();
