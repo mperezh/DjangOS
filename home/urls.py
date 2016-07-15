@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name="home"),
+    url(r'^apps/chrome$', views.chrome_app, name="home"),
 ]

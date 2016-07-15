@@ -1,4 +1,4 @@
-function date() {
+/*function date() {
 
     var today = new Date();
     var dd = today.getDate();
@@ -14,9 +14,8 @@ function date() {
     }
 
     today = mm + '/' + dd + '/' + yyyy;
-    /*document.write(today);*/
     document.getElementById("date").innerHTML = today.toString();
-}
+}*/
 
 function checkTime(i) {
     if (i < 10) {

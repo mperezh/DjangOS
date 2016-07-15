@@ -7,67 +7,53 @@
         <div class="mdl-cell mdl-cell--8-col desktop-cell">
             <div id="desktop">
 
-                <!--<div id="desktop-background"></div>-->
+                <div id="desktop-background"></div>
 
-                <div id="program-window">
-                    <div id="status-bar">
-                        <span id="program-name">Google Chrome</span>
-                        <button class="mdl-button mdl-js-button mdl-button--icon">
-                            <i class="material-icons">clear</i>
-                        </button>
-                        <button class="mdl-button mdl-js-button mdl-button--icon">
-                            <i class="material-icons">remove</i>
-                        </button>
-                    </div>
-                    <div id="program"></div>
-                </div>
-
-                <footer class="mdl-mini-footer">
-                    <div class="mdl-mini-footer__left-section">
-                        <div class="mdl-logo">
-
-                            <button id="demo-menu-top-left" class="mdl-button mdl-js-button mdl-button--icon">
-                                <i class="material-icons">apps</i>
-                            </button>
-
-                            <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
-                                data-mdl-for="demo-menu-top-left">
-                                <li class="mdl-menu__item"><span><i class="fa fa-chrome"></i> Chrome</span></li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-folder"></i> Documentos</span></li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-calculator"></i> Calculadora</span>
-                                </li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-camera"></i> C&aacute;mara</span></li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-play-circle"></i> Reproductor</span>
-                                </li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-picture-o"></i> Galer&iacute;a</span>
-                                </li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-calendar "></i> Calendario</span></li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-print"></i> Impresoras</span></li>
-                                <li class="mdl-menu__item"><span><i class="fa fa-gear"></i> Opciones</span></li>
-                            </ul>
-                        </div>
-
-
-                        <button class="mdl-button mdl-js-button mdl-button--icon">
-                            <i class="fa fa-folder"></i>
-                        </button>
-
-                        <button class="mdl-button mdl-js-button mdl-button--icon">
-                            <i class="fa fa-chrome "></i>
-                        </button>
-
-                    </div>
-                    <div class="mdl-mini-footer__right-section">
-                        <div>
-                            <span id="time"></span>
-                            <button class="mdl-button mdl-js-button mdl-button--icon">
-                                <i class="material-icons">account_circle</i>
-                            </button>
-                        </div>
-                    </div>
-                </footer>
             </div>
+            <footer class="mdl-mini-footer">
+                <div class="mdl-mini-footer__left-section">
+                    <div class="mdl-logo">
 
+                        <button id="demo-menu-top-left" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">apps</i>
+                        </button>
+
+                        <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
+                            data-mdl-for="demo-menu-top-left">
+                            <li class="mdl-menu__item chrome-app"><span><i class="fa fa-chrome"></i> Chrome</span></li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-folder"></i> Documentos</span></li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-calculator"></i> Calculadora</span>
+                            </li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-camera"></i> C&aacute;mara</span></li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-play-circle"></i> Reproductor</span>
+                            </li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-picture-o"></i> Galer&iacute;a</span>
+                            </li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-calendar "></i> Calendario</span></li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-print"></i> Impresoras</span></li>
+                            <li class="mdl-menu__item"><span><i class="fa fa-gear"></i> Opciones</span></li>
+                        </ul>
+                    </div>
+
+
+                    <button class="mdl-button mdl-js-button mdl-button--icon">
+                        <i class="fa fa-folder"></i>
+                    </button>
+
+                    <button class="mdl-button mdl-js-button mdl-button--icon chrome-app">
+                        <i class="fa fa-chrome "></i>
+                    </button>
+
+                </div>
+                <div class="mdl-mini-footer__right-section">
+                    <div>
+                        <span id="time"></span>
+                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">account_circle</i>
+                        </button>
+                    </div>
+                </div>
+            </footer>
         </div>
         <div class="mdl-cell mdl-cell--4-col">
             <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
