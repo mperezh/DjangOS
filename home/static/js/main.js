@@ -1,16 +1,14 @@
-/*$(document).ready(function () {
-    var desktop = $('#desktop');
-    $(window).height();
-});*/
-
 $(document).ready(function () { resizeDiv(); });
 
 window.onresize = function (event) { resizeDiv(); }
 
 function resizeDiv() {
-    //vpw = $(window).width();
-    var vph = $(window).height();
-    vph = vph - $('.mdl-mini-footer').outerHeight()
-    $('#desktop').css({'height':vph + 'px'});
+    //var vph = $(window).height();
+    //var vphp = $(window).height();
+    var vph = $(window).height() - $('.mdl-mini-footer').outerHeight();
+    var vphp = $(window).height() - $('.mdl-mini-footer').outerHeight() - $('#status-bar').outerHeight();
     $('#desktop-background').css({'height':vph + 'px'});
+    $('#desktop').css({'height':vph + 'px'});
+    $('#program').css({'height':vphp + 'px'});
+    //$('#program').css({'height':vph + 'px'});
 }
