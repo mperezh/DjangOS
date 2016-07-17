@@ -7,6 +7,7 @@
 * Add tooltips on buttons
 * Improve app drawer
 * Show loading gif
+* Simplify paths
 * Processes 
   * Minimize
   * Close
