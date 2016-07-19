@@ -1,14 +1,21 @@
 <div id="program-window">
     <div id="status-bar">
         <span id="program-name">{{ programName }}</span>
-        <button class="mdl-button mdl-js-button mdl-button--icon">
+        <button class="mdl-button mdl-js-button mdl-button--icon windowButton">
             <i class="material-icons">clear</i>
         </button>
-        <button class="mdl-button mdl-js-button mdl-button--icon">
+        <button class="mdl-button mdl-js-button mdl-button--icon windowButton">
             <i class="material-icons">remove</i>
         </button>
     </div>
     <div id="program">
         <img src="/static/img/apps/{{ programId }}/image.jpg">
     </div>
+
+    <script>
+        $('.windowButton').click(function () {
+            $("#desktop").load("desktop");
+        });
+    </script>
+
 </div>
