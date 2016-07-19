@@ -11,13 +11,13 @@ def desktop(request):
     return HttpResponse('<div id="desktop-background"></div>')
 
 
-def chrome_app(request):
+def open_app(request, app_name):
     # Make query here
     context = {
         'programName': 'Google Chrome',
-        'programId': 'chrome',
+        'programId': app_name,
     }
-    rendered = render_to_string('home/apps/chrome.html', context)
+    rendered = render_to_string('home/apps/{0}.html'.format(app_name), context)
     return HttpResponse(rendered)
 
 
