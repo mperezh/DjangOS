@@ -1,3 +1,4 @@
 from django.contrib import admin
+from home.models import App
 
-# Register your models here.
+admin.site.register(App)
