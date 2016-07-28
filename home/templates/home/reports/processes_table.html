@@ -1,0 +1,10 @@
+<table class="table table-condensed">
+    <tbody>
+    {% for process, percentage in processes_list %}
+        <tr>
+            <td>{{ process }}</td>
+            <td>{{ percentage }}%</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

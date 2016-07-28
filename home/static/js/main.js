@@ -15,5 +15,6 @@ window.onresize = function (event) {
 }
 
 $('.chrome-app').click(function () {
-    $("#desktop").load("apps/chrome");
+    $("#desktop").load("apps/open/chrome");
+    resizeDiv();
 });

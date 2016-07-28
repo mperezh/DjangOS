@@ -1,6 +1,6 @@
 <div id="program-window">
     <div id="status-bar">
-        <span id="program-name">{{ programName }}</span>
+        <span id="program-name">{{ app_name }}</span>
         <button class="mdl-button mdl-js-button mdl-button--icon windowButton">
             <i class="material-icons">clear</i>
         </button>
@@ -9,12 +9,13 @@
         </button>
     </div>
     <div id="program">
-        <img src="/static/img/apps/{{ programId }}.jpg">
+        <img src="/static/img/apps/{{ app_id }}.jpg">
     </div>
 
     <script>
         $('.windowButton').click(function () {
             $("#desktop").load("desktop");
+            resizeDiv();
         });
     </script>
 
