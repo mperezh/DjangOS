@@ -2,146 +2,135 @@
 
 {% block content %}
 
-    {% load staticfiles %}
-    <div class="mdl-grid custom-grid">
-        <div class="mdl-cell mdl-cell--8-col desktop-cell">
-            <div id="desktop">
+  {% load staticfiles %}
+  <div class="mdl-grid custom-grid">
+    <div class="mdl-cell mdl-cell--8-col desktop-cell">
+      <div id="desktop">
 
-                <div id="desktop-background"></div>
+        <div id="desktop-background"></div>
 
-            </div>
-            <footer class="mdl-mini-footer">
-                <div class="mdl-mini-footer__left-section">
-                    <div class="mdl-logo">
+      </div>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+          <div class="mdl-logo">
 
-                        <button id="demo-menu-top-left" class="mdl-button mdl-js-button mdl-button--icon">
-                            <i class="material-icons">apps</i>
-                        </button>
+            <button id="demo-menu-top-left" class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">apps</i>
+            </button>
 
-                        <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
-                            data-mdl-for="demo-menu-top-left">
-                            <li class="mdl-menu__item chrome-app"><span><i class="fa fa-chrome"></i> Chrome</span></li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-folder"></i> Documentos</span></li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-calculator"></i> Calculadora</span>
-                            </li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-camera"></i> C&aacute;mara</span></li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-play-circle"></i> Reproductor</span>
-                            </li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-picture-o"></i> Galer&iacute;a</span>
-                            </li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-calendar "></i> Calendario</span></li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-print"></i> Impresoras</span></li>
-                            <li class="mdl-menu__item"><span><i class="fa fa-gear"></i> Opciones</span></li>
-                        </ul>
-                    </div>
+            <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
+                data-mdl-for="demo-menu-top-left">
+              <li class="mdl-menu__item chrome-app"><span><i class="fa fa-chrome"></i> Chrome</span></li>
+              <li class="mdl-menu__item"><span><i class="fa fa-folder"></i> Documentos</span></li>
+              <li class="mdl-menu__item"><span><i class="fa fa-calculator"></i> Calculadora</span>
+              </li>
+              <li class="mdl-menu__item"><span><i class="fa fa-camera"></i> C&aacute;mara</span></li>
+              <li class="mdl-menu__item"><span><i class="fa fa-play-circle"></i> Reproductor</span>
+              </li>
+              <li class="mdl-menu__item"><span><i class="fa fa-picture-o"></i> Galer&iacute;a</span>
+              </li>
+              <li class="mdl-menu__item"><span><i class="fa fa-calendar "></i> Calendario</span></li>
+              <li class="mdl-menu__item"><span><i class="fa fa-print"></i> Impresoras</span></li>
+              <li class="mdl-menu__item"><span><i class="fa fa-gear"></i> Opciones</span></li>
+            </ul>
+          </div>
 
 
-                    <button class="mdl-button mdl-js-button mdl-button--icon">
-                        <i class="fa fa-folder"></i>
-                    </button>
+          <button class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="fa fa-folder"></i>
+          </button>
 
-                    <button class="mdl-button mdl-js-button mdl-button--icon chrome-app">
-                        <i class="fa fa-chrome "></i>
-                    </button>
+          <button class="mdl-button mdl-js-button mdl-button--icon chrome-app">
+            <i class="fa fa-chrome "></i>
+          </button>
 
-                </div>
-                <div class="mdl-mini-footer__right-section">
-                    <div>
-                        <span id="time"></span>
-                        <button class="mdl-button mdl-js-button mdl-button--icon">
-                            <i class="material-icons">account_circle</i>
-                        </button>
-                    </div>
-                </div>
-            </footer>
         </div>
-        <div class="mdl-cell mdl-cell--4-col">
-            <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
-                <header class="mdl-layout__header">
-                    <div class="mdl-layout__header-row">
-                        <!-- Title -->
-                        <span class="mdl-layout-title">Administrador</span>
-                    </div>
-                    <!-- Tabs -->
-                    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                        <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Recursos</a>
-                        <a href="#fixed-tab-2" class="mdl-layout__tab">Procesos</a>
-                        <a href="#fixed-tab-3" class="mdl-layout__tab">I/O</a>
-                    </div>
-                </header>
-
-                <main class="mdl-layout__content">
-                    <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-                        <div class="page-content">
-                            <!-- Two Line List with secondary info and action -->
-                            <style>
-                                .demo-list-two {
-                                    width: 300px;
-                                }
-                            </style>
-
-                            <ul class="demo-list-two mdl-list">
-                                <li class="mdl-list__item mdl-list__item--two-line">
-                                    <span class="mdl-list__item-primary-content">
-                                        <i class="material-icons mdl-list__item-avatar">memory</i>
-                                        <span>CPU</span>
-                                        <span class="mdl-list__item-sub-title">50%</span>
-                                    </span>
-                                </li>
-                                <li class="mdl-list__item mdl-list__item--two-line">
-                                    <span class="mdl-list__item-primary-content">
-                                        <i class="material-icons mdl-list__item-avatar">developer_board</i>
-                                        <span>Memoria</span>
-                                        <span class="mdl-list__item-sub-title">10%</span>
-                                    </span>
-                                </li>
-                                <li class="mdl-list__item mdl-list__item--two-line">
-                                    <span class="mdl-list__item-primary-content">
-                                        <i class="material-icons mdl-list__item-avatar">storage</i>
-                                        <span>Disco</span>
-                                        <span class="mdl-list__item-sub-title">5%</span>
-                                    </span>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </section>
-                    <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-                        <div class="page-content">
-                            <div class="panel panel-default process">
-                                <table class="table table-condensed"> <!-- here -->
-                                    <thead>
-                                    <tr>
-                                        <th>Proceso</th>
-                                        <th>Porcentaje</th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                                <div class="div-table-content">
-                                    <table class="table table-condensed">
-                                        <tbody>
-                                        <tr>
-                                            <td>Proceso 1</td>
-                                            <td>20%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Proceso 2</td>
-                                            <td>30%</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </section>
-                    <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-                        <div class="page-content"><!-- Your content goes here --></div>
-                    </section>
-                </main>
-            </div>
+        <div class="mdl-mini-footer__right-section">
+          <div>
+            <span id="time"></span>
+            <button class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">account_circle</i>
+            </button>
+          </div>
         </div>
+      </footer>
     </div>
+    <div class="mdl-cell mdl-cell--4-col">
+      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+        <header class="mdl-layout__header">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Administrador</span>
+          </div>
+          <!-- Tabs -->
+          <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Recursos</a>
+            <a href="#fixed-tab-2" class="mdl-layout__tab">Procesos</a>
+            <a href="#fixed-tab-3" class="mdl-layout__tab">I/O</a>
+          </div>
+        </header>
+
+        <main class="mdl-layout__content">
+          <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+            <div class="page-content">
+              <!-- Two Line List with secondary info and action -->
+              <style>
+                .demo-list-two {
+                  width: 300px;
+                }
+              </style>
+
+              <ul class="demo-list-two mdl-list">
+                <li class="mdl-list__item mdl-list__item--two-line">
+                  <span class="mdl-list__item-primary-content">
+                      <i class="material-icons mdl-list__item-avatar">memory</i>
+                      <span>CPU</span>
+                      <span class="mdl-list__item-sub-title">50%</span>
+                  </span>
+                </li>
+                <li class="mdl-list__item mdl-list__item--two-line">
+                  <span class="mdl-list__item-primary-content">
+                      <i class="material-icons mdl-list__item-avatar">developer_board</i>
+                      <span>Memoria</span>
+                      <span class="mdl-list__item-sub-title">10%</span>
+                  </span>
+                </li>
+                <li class="mdl-list__item mdl-list__item--two-line">
+                  <span class="mdl-list__item-primary-content">
+                      <i class="material-icons mdl-list__item-avatar">storage</i>
+                      <span>Disco</span>
+                      <span class="mdl-list__item-sub-title">5%</span>
+                  </span>
+                </li>
+
+              </ul>
+            </div>
+          </section>
+          <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+            <div class="page-content">
+              <div class="panel panel-default process">
+                <!-- process table -->
+                <table class="striped highlight centered">
+                  <thead>
+                  <tr>
+                    <th>Proceso</th>
+                    <th>CPU</th>
+                    <th>RAM</th>
+                  </tr>
+                  </thead>
+                  <tbody id="processes-table">
+                  {% include "home/reports/processes_table.html" %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+          <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+            <div class="page-content"><!-- Your content goes here --></div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
