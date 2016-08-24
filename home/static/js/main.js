@@ -25,3 +25,13 @@ $('.chrome-app').click(function () {
     
     resizeDiv();
 });
+
+$('.calculator-app').click(function () {
+    $("#desktop").load("apps/open/calculator");
+    $("#processes-table").load("reports/processes/add/calculator");
+    setTimeout(function() {
+        $("#resources").load("reports/resources");
+    }, 100);
+    
+    resizeDiv();
+});
