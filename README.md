@@ -8,7 +8,9 @@
 - [ ] Improve app drawer
 - [ ] Show loading gif
 - [x] ~~Simplify paths~~
-- [ ] Fix OnResize
+- [x] ~~Fix OnResize~~
+- [ ] Use materialize tables
+- [ ] Hide admin panel
 - [ ] Processes 
   - [ ] Minimize
   - [ ] Close

@@ -9,7 +9,8 @@ def index(request):
 
 
 def show_desktop(request):
-    return HttpResponse('<div id="desktop-background"></div>')
+    rendered = render_to_string('home/windows/desktop.html')
+    return HttpResponse(rendered)
 
 
 def open_app(request, app_id):
@@ -22,7 +23,7 @@ def open_app(request, app_id):
         'app_id': app.app_id,
         'app_name': app.app_name,
     }
-    rendered = render_to_string('home/apps/app.html', context)
+    rendered = render_to_string('home/windows/app.html', context)
     return HttpResponse(rendered)
 
 
