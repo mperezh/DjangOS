@@ -6,9 +6,7 @@
   <div class="mdl-grid custom-grid">
     <div class="mdl-cell mdl-cell--8-col desktop-cell">
       <div id="desktop">
-
         <div id="desktop-background"></div>
-
       </div>
       <footer class="mdl-mini-footer">
         <div class="mdl-mini-footer__left-section">
@@ -21,7 +19,7 @@
             <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
                 data-mdl-for="demo-menu-top-left">
               <li class="mdl-menu__item chrome-app"><span><i class="fa fa-chrome"></i> Chrome</span></li>
-              <li class="mdl-menu__item"><span><i class="fa fa-folder"></i> Documentos</span></li>
+              <li class="mdl-menu__item folders-app"><span><i class="fa fa-folder"></i> Documentos</span></li>
               <li class="mdl-menu__item calculator-app"><span><i class="fa fa-calculator"></i> Calculadora</span>
               </li>
               <li class="mdl-menu__item"><span><i class="fa fa-camera"></i> C&aacute;mara</span></li>
@@ -35,8 +33,7 @@
             </ul>
           </div>
 
-
-          <button class="mdl-button mdl-js-button mdl-button--icon">
+          <button class="mdl-button mdl-js-button mdl-button--icon folders-app">
             <i class="fa fa-folder"></i>
           </button>
 
@@ -74,13 +71,8 @@
           <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
             <div class="page-content">
               <!-- Two Line List with secondary info and action -->
-              <style>
-                .demo-list-two {
-                  width: 300px;
-                }
-              </style>
               <ul id="resources" class="demo-list-two mdl-list">
-{% include "home/reports/processes_table.html" %}
+                {% include "home/reports/processes_table.html" %}
               </ul>
             </div>
           </section>
@@ -97,7 +89,7 @@
                   </tr>
                   </thead>
                   <tbody id="processes-table">
-                  {% include "home/reports/processes_table.html" %}
+                    {% include "home/reports/processes_table.html" %}
                   </tbody>
                 </table>
               </div>

@@ -22,7 +22,6 @@ $('.chrome-app').click(function () {
     setTimeout(function() {
         $("#resources").load("reports/resources");
     }, 100);
-    
     resizeDiv();
 });
 
@@ -32,6 +31,14 @@ $('.calculator-app').click(function () {
     setTimeout(function() {
         $("#resources").load("reports/resources");
     }, 100);
-    
+    resizeDiv();
+});
+
+$('.folders-app').click(function () {
+    $("#desktop").load("apps/open/folders");
+    $("#processes-table").load("reports/processes/add/folders");
+    setTimeout(function() {
+        $("#resources").load("reports/resources");
+    }, 100);
     resizeDiv();
 });
