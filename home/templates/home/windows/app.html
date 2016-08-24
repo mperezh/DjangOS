@@ -14,8 +14,11 @@
 
     <script>
         $('#close-button').click(function () {
-            $("#desktop").load("desktop");
             $("#processes-table").load("reports/processes/close/{{ app_id }}");
+            setTimeout(function() {
+                $("#resources").load("reports/resources");
+            }, 100);
+            $("#desktop").load("desktop");
         });
 
         $('#minimize-button').click(function () {

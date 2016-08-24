@@ -36,8 +36,11 @@ def close_app(request):
 
 
 def add_process(request, app_id):
+    try:
+        ProcessList.objects.create(app=App.objects.get(app_id=app_id))
+    except Exception:
+        pass
 
-    ProcessList.objects.create(app=App.objects.get(app_id=app_id))
     context = {
         'processes_list': ProcessList.objects.all()
     }
@@ -54,4 +57,23 @@ def remove_process(request, app_id):
     }
 
     rendered = render_to_string('home/reports/processes_table.html', context)
+    return HttpResponse(rendered)
+
+def resources(request):
+    cpu_use = 0
+    memory_use = 0 
+    disk_use = 0 
+
+    for process in ProcessList.objects.all():
+        cpu_use += process.app.cpu_use
+        memory_use += process.app.memory_use
+        disk_use += process.app.disk_use
+
+    context = {
+        'cpu_use': cpu_use,
+        'memory_use': memory_use,
+        'disk_use': disk_use
+    }
+
+    rendered = render_to_string('home/reports/resources.html', context)
     return HttpResponse(rendered)

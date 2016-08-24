@@ -8,6 +8,8 @@ function resizeDiv() {
 
 $(document).ready(function () {
     resizeDiv();
+    $("#processes-table").load("reports/processes/add/system");
+    $("#resources").load("reports/resources");
 });
 
 window.onresize = function (event) {
@@ -17,5 +19,9 @@ window.onresize = function (event) {
 $('.chrome-app').click(function () {
     $("#desktop").load("apps/open/chrome");
     $("#processes-table").load("reports/processes/add/chrome");
+    setTimeout(function() {
+        $("#resources").load("reports/resources");
+    }, 100);
+    
     resizeDiv();
 });
