@@ -9,8 +9,9 @@
 - [ ] Show loading gif
 - [x] ~~Simplify paths~~
 - [x] ~~Fix OnResize~~
-- [ ] Use materialize tables
-- [ ] Hide admin panel
+- [x] ~~Use materialize tables~~
+- [ ] Change tabs color scheme
+- [ ] Hide and show admin panel
 - [ ] Processes 
   - [ ] Minimize
   - [ ] Close
@@ -23,3 +24,4 @@
 ### Ideas:
   * Login screen
   * Mobile version
+    * Hide footer apps on small
