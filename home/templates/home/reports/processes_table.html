@@ -1,10 +1,7 @@
-<table class="table table-condensed">
-    <tbody>
-    {% for process, percentage in processes_list %}
-        <tr>
-            <td>{{ process }}</td>
-            <td>{{ percentage }}%</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+{% for process in processes_list %}
+  <tr>
+    <td>{{ process.app.app_id }}</td>
+    <td>{{ process.app.cpu_use }}%</td>
+    <td>{{ process.app.memory_use }}%</td>
+  </tr>
+{% endfor %}

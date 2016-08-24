@@ -1,10 +1,10 @@
 <div id="program-window">
     <div id="status-bar">
         <span id="program-name">{{ app_name }}</span>
-        <button class="mdl-button mdl-js-button mdl-button--icon windowButton">
+        <button id="close-button" class="mdl-button mdl-js-button mdl-button--icon windowButton">
             <i class="material-icons">clear</i>
         </button>
-        <button class="mdl-button mdl-js-button mdl-button--icon windowButton">
+        <button id="minimize-button" class="mdl-button mdl-js-button mdl-button--icon windowButton">
             <i class="material-icons">remove</i>
         </button>
     </div>
@@ -13,10 +13,14 @@
     </div>
 
     <script>
-        $('.windowButton').click(function () {
+        $('#close-button').click(function () {
+            $("#desktop").load("desktop");
+            $("#processes-table").load("reports/processes/close/{{ app_id }}");
+        });
+
+        $('#minimize-button').click(function () {
             $("#desktop").load("desktop");
         });
         resizeDiv();
     </script>
-
 </div>

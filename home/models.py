@@ -11,3 +11,9 @@ class App(models.Model):
     def __str__(self):
         return self.app_name
 
+
+class ProcessList(models.Model):
+    app = models.OneToOneField(App)
+
+    def __str__(self):
+        return self.app.app_name
