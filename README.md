@@ -4,7 +4,7 @@
 
 ### To do
 
-- [ ] Add tooltips on buttons
+- [x] ~~Add tooltips on buttons~~
 - [ ] Improve app drawer
 - [ ] Show loading gif
 - [x] ~~Simplify paths~~
