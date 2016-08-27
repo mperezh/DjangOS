@@ -20,8 +20,6 @@ def open_app(request, app_id):
     # Make query here
     app = App.objects.get(app_id=app_id)
 
-    # Add to processes list
-
     context = {
         'app_id': app.app_id,
         'app_name': app.app_name,
@@ -59,6 +57,7 @@ def remove_process(request, app_id):
     rendered = render_to_string('home/reports/processes_table.html', context)
     return HttpResponse(rendered)
 
+
 def resources(request):
     cpu_use = 0
     memory_use = 0 
@@ -77,3 +76,7 @@ def resources(request):
 
     rendered = render_to_string('home/reports/resources.html', context)
     return HttpResponse(rendered)
+
+
+def add_to_memory_table(request, app_id):
+    pass

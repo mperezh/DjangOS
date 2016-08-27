@@ -17,3 +17,7 @@ class ProcessList(models.Model):
 
     def __str__(self):
         return self.app.app_name
+
+
+class MemoryTable(models.Model):
+    pass
