@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from home.models import App, ProcessList
-from collections import OrderedDict
+from django.db import IntegrityError
+# from collections import OrderedDict
 
 
 def index(request):
@@ -36,8 +37,8 @@ def close_app(request):
 def add_process(request, app_id):
     try:
         ProcessList.objects.create(app=App.objects.get(app_id=app_id))
-    except Exception:
-        pass
+    except IntegrityError as e:
+        print("Exception:", e.__cause__, "(App already on process list)")
 
     context = {
         'processes_list': ProcessList.objects.all()
