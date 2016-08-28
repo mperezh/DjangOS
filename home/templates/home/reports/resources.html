@@ -1,23 +1,30 @@
-
-                <li class="mdl-list__item mdl-list__item--two-line">
-                  <span class="mdl-list__item-primary-content">
-                      <i class="material-icons mdl-list__item-avatar">memory</i>
-                      <span>CPU</span>
-                      <span class="mdl-list__item-sub-title">{{ cpu_use }}%</span>
-                  </span>
-                </li>
-                <li class="mdl-list__item mdl-list__item--two-line">
-                  <span class="mdl-list__item-primary-content">
-                      <i class="material-icons mdl-list__item-avatar">developer_board</i>
-                      <span>Memoria</span>
-                      <span class="mdl-list__item-sub-title">{{ memory_use }} Mb</span>
-                  </span>
-                </li>
-                <li class="mdl-list__item mdl-list__item--two-line">
-                  <span class="mdl-list__item-primary-content">
-                      <i class="material-icons mdl-list__item-avatar">storage</i>
-                      <span>Disco</span>
-                      <span class="mdl-list__item-sub-title">{{ disk_use }}%</span>
-                  </span>
-                </li>
-
+<li class="collection-item avatar">
+  <i class="material-icons circle">memory</i>
+  <span class="title black-text">CPU</span><br>
+  <p class="grey-text text-darken-2">
+    {{ cpu_use }}%
+    <span class="progress">
+      <span class="determinate" style="width: {{ cpu_use }}%"></span>
+    </span>
+  </p>
+</li>
+<li class="collection-item avatar">
+  <i class="material-icons circle">developer_board</i>
+  <span class="title black-text">Memoria</span><br>
+  <p class="grey-text text-darken-2">
+    {{ memory_use }} Mb / {{ total_memory }} Mb
+    <span class="progress">
+      <span class="determinate" style="width: {{ p_memory_use }}%"></span>
+    </span>
+  </p>
+</li>
+<li class="collection-item avatar">
+  <i class="material-icons circle">storage</i>
+  <span class="title black-text">Disco</span><br>
+  <p class="grey-text text-darken-2">
+    {{ disk_use }}%
+    <span class="progress">
+      <span class="determinate" style="width: {{ disk_use }}%"></span>
+    </span>
+  </p>
+</li>

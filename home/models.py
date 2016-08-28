@@ -24,7 +24,7 @@ class MemoryTable(models.Model):
     list_length = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.list_length)
 
 
 class MemorySpace(models.Model):

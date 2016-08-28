@@ -1,18 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from home.models import App, ProcessList, MemorySpace, MemoryTable
+from home.models import (App, ProcessList,
+                         MemorySpace, MemoryTable)
 from django.db import IntegrityError
 # from collections import OrderedDict
 
 
 def index(request):
-    # Clear ProcessList
+    # Clear processes
     ProcessList.objects.all().delete()
     MemorySpace.objects.all().delete()
     MemoryTable.objects.all().delete()
 
-    l = [1,1,1,1,1] + ([0] * 1019)
+    l = [1, 1, 1, 1, 1] + ([0] * 1019)
     m = MemoryTable(list=str(l), list_length=1024)
     m.save()
 
@@ -76,10 +77,14 @@ def resources(request):
         memory_use += process.app.memory_use
         disk_use += process.app.disk_use
 
+    total_memory = MemoryTable.objects.first().list_length
+
     context = {
         'cpu_use': cpu_use,
         'memory_use': memory_use,
-        'disk_use': disk_use
+        'disk_use': disk_use,
+        'total_memory': total_memory,
+        'p_memory_use': (memory_use*100)/total_memory
     }
 
     rendered = render_to_string('home/reports/resources.html', context)

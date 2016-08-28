@@ -73,15 +73,16 @@
           <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
             <div class="page-content">
               <!-- Two Line List with secondary info and action -->
-              <ul id="resources" class="demo-list-two mdl-list">
-                {% include "home/reports/processes_table.html" %}
+              <ul id="resources" class="collection">
+                {% include "home/reports/resources.html" %}
               </ul>
             </div>
           </section>
           <section class="mdl-layout__tab-panel" id="fixed-tab-2">
             <div class="page-content">
+              <!-- process table -->
               <div class="panel panel-default process">
-                <!-- process table -->
+                <span class="mdl-layout-title center">Tabla de procesos</span>
                 <table class="striped highlight centered">
                   <thead>
                   <tr>
@@ -92,9 +93,11 @@
                   </tr>
                   </thead>
                   <tbody id="processes-table">
-                    {% include "home/reports/processes_table.html" %}
+                  {% include "home/reports/processes_table.html" %}
                   </tbody>
                 </table>
+                <br>
+                <span class="mdl-layout-title center">Tabla de memoria</span>
               </div>
             </div>
           </section>
