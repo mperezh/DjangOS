@@ -13,9 +13,10 @@
 - [ ] Change tabs color scheme
 - [ ] Hide and show admin panel
 - [ ] Processes 
-  - [ ] Minimize
-  - [ ] Close
-  - [ ] Add on DB: App name, CPU, memory and disk use
+  - [x] ~~Minimize~~
+  - [x] ~~Close~~
+  - [ ] Memory table
+  - [ ] Swap
 - [ ] Footer:
   - [ ] Calendar
   - [ ] LAN/WLAN connection

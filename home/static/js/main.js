@@ -6,15 +6,18 @@ function resizeDiv() {
     $('#program').css({'height': vphp + 'px'});
 }
 
+window.onresize = function (event) {
+    resizeDiv();
+};
+
 $(document).ready(function () {
     resizeDiv();
     $("#processes-table").load("reports/processes/add/system");
-    $("#resources").load("reports/resources");
+    //$("#resources").load("reports/resources");
+    setTimeout(function() {
+        $("#resources").load("reports/resources");
+    }, 100);
 });
-
-window.onresize = function (event) {
-    resizeDiv();
-}
 
 $('.chrome-app').click(function () {
     $("#desktop").load("apps/open/chrome");
