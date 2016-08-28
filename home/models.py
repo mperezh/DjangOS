@@ -20,16 +20,17 @@ class ProcessList(models.Model):
 
 
 class MemoryTable(models.Model):
-    space = models.OneToOneField(MemorySpace)
+    list = models.CharField(max_length=5000)
+    list_length = models.IntegerField(default=0)
 
     def __str__(self):
-        return "{}, {}".format(self.id, self.space.app.app_name)
+        return str(self.id)
 
 
 class MemorySpace(models.Model):
     app = models.ForeignKey(App)
-    start = models.IntegerField
-    length = models.IntegerField
+    start = models.IntegerField(default=0)
+    length = models.IntegerField(default=0)
 
     def __str__(self):
         return "{}, {}, {}".format(self.app.app_name, self.start, self.length)

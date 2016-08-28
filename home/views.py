@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from home.models import App, ProcessList
+from home.models import App, ProcessList, MemorySpace, MemoryTable
 from django.db import IntegrityError
 # from collections import OrderedDict
 
@@ -9,6 +9,13 @@ from django.db import IntegrityError
 def index(request):
     # Clear ProcessList
     ProcessList.objects.all().delete()
+    MemorySpace.objects.all().delete()
+    MemoryTable.objects.all().delete()
+
+    l = [1,1,1,1,1] + ([0] * 1019)
+    m = MemoryTable(list=str(l), list_length=1024)
+    m.save()
+
     return render(request, 'home/index.html')
 
 
