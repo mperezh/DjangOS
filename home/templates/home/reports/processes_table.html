@@ -1,5 +1,6 @@
 {% for process in processes_list %}
   <tr>
+    <td>{{ process.app.id }}</td>
     <td>{{ process.app.app_id }}</td>
     <td>{{ process.app.cpu_use }}%</td>
     <td>{{ process.app.memory_use }} Mb</td>
