@@ -13,15 +13,17 @@ window.onresize = function (event) {
 $(document).ready(function () {
     resizeDiv();
     $("#processes-table").load("reports/processes/add/system");
-    //$("#resources").load("reports/resources");
+    $("#memory-table").load("reports/memory-table/show");
     setTimeout(function() {
         $("#resources").load("reports/resources");
+
     }, 100);
 });
 
 $('.chrome-app').click(function () {
     $("#desktop").load("apps/open/chrome");
     $("#processes-table").load("reports/processes/add/chrome");
+    $("#memory-table").load("reports/memory-table/add/chrome");
     setTimeout(function() {
         $("#resources").load("reports/resources");
     }, 100);
@@ -40,6 +42,7 @@ $('.calculator-app').click(function () {
 $('.folders-app').click(function () {
     $("#desktop").load("apps/open/folders");
     $("#processes-table").load("reports/processes/add/folders");
+    $("#memory-table").load("reports/memory-table/add/folders");
     setTimeout(function() {
         $("#resources").load("reports/resources");
     }, 100);

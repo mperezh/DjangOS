@@ -1,3 +1,4 @@
+from ast import literal_eval
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -91,5 +92,73 @@ def resources(request):
     return HttpResponse(rendered)
 
 
+def show_memory_table(request):
+
+    context = {
+        'list': literal_eval(MemoryTable.objects.first().list)
+    }
+
+    rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)
+
+
 def add_to_memory_table(request, app_id):
-    pass
+    app = App.objects.get(app_id=app_id)
+    memory_table = MemoryTable.objects.first()
+    l = literal_eval(memory_table.list)
+    first = True
+    count = 0
+    total_count = 0
+    start = 0
+
+    for i in range(len(l)):
+        if total_count <= app.memory_use - 1:
+            if l[i] == 0:
+                if first:
+                    start = i
+                    first = False
+                l[i] = app.id
+                count += 1
+                total_count += 1
+            else:
+                if count > 0:
+                    first = True
+                    # total_count += count
+                    count = 0
+                    m = MemorySpace(app=app, start=start, length=count)
+                    m.save()
+        else:
+            break
+
+    print(l)
+    memory_table.list = str(l)
+    memory_table.save()
+
+    context = {
+        'list': l
+    }
+
+    rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)
+
+
+def remove_from_memory_table(request, app_id):
+    app = App.objects.get(app_id=app_id)
+    memory_table = MemoryTable.objects.first()
+    l = literal_eval(memory_table.list)
+
+    for i in range(len(l)):
+        if l[i] == app.id:
+            l[i] = 0
+
+    memory_table.list = str(l)
+    memory_table.save()
+
+    MemorySpace.objects.filter(app=app).delete()
+
+    context = {
+        'list': l
+    }
+
+    rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)

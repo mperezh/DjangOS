@@ -15,6 +15,7 @@
     <script>
         $('#close-button').click(function () {
             $("#processes-table").load("reports/processes/close/{{ app_id }}");
+            $("#memory-table").load("reports/memory-table/remove/{{ app_id }}");
             setTimeout(function() {
                 $("#resources").load("reports/resources");
             }, 100);
