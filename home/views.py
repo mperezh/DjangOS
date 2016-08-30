@@ -14,8 +14,8 @@ def index(request):
     MemorySpace.objects.all().delete()
     MemoryTable.objects.all().delete()
 
-    l = [1, 1, 1, 1, 1] + ([0] * 1019)
-    m = MemoryTable(list=str(l), list_length=1024)
+    l = [1, 1, 1, 1, 1] + ([0] * 27)
+    m = MemoryTable(list=str(l), list_length=32)
     m.save()
 
     return render(request, 'home/index.html')
@@ -104,35 +104,35 @@ def show_memory_table(request):
 
 def add_to_memory_table(request, app_id):
     app = App.objects.get(app_id=app_id)
+    memory = app.memory_use
     memory_table = MemoryTable.objects.first()
     l = literal_eval(memory_table.list)
     first = True
     count = 0
-    total_count = 0
     start = 0
-
-    for i in range(len(l)):
-        if total_count <= app.memory_use - 1:
-            if l[i] == 0:
-                if first:
-                    start = i
-                    first = False
-                l[i] = app.id
-                count += 1
-                total_count += 1
+    if ProcessList.objects.filter(app=app).count() == 0:
+        for i in range(len(l)):
+            if memory > 0:
+                if l[i] == 0:
+                    if first:
+                        start = i
+                        first = False
+                    l[i] = app.id
+                    count += 1
+                    memory -= 1
+                if i < len(l) and count > 0:
+                    if l[i + 1] != 0:
+                        m = MemorySpace(app=app, start=start, length=count)
+                        m.save()
+                        first = True
+                        count = 0
             else:
-                if count > 0:
-                    first = True
-                    # total_count += count
-                    count = 0
-                    m = MemorySpace(app=app, start=start, length=count)
-                    m.save()
-        else:
-            break
+                m = MemorySpace(app=app, start=start, length=count)
+                m.save()
+                break
 
-    print(l)
-    memory_table.list = str(l)
-    memory_table.save()
+        memory_table.list = str(l)
+        memory_table.save()
 
     context = {
         'list': l

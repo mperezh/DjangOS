@@ -33,6 +33,7 @@ $('.chrome-app').click(function () {
 $('.calculator-app').click(function () {
     $("#desktop").load("apps/open/calculator");
     $("#processes-table").load("reports/processes/add/calculator");
+    $("#memory-table").load("reports/memory-table/add/calculator");
     setTimeout(function() {
         $("#resources").load("reports/resources");
     }, 100);
