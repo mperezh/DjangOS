@@ -15,7 +15,8 @@
 - [ ] Processes 
   - [x] ~~Minimize~~
   - [x] ~~Close~~
-  - [ ] Memory table
+  - [x] ~~Memory table~~
+  - [ ] Compaction
   - [ ] Swap
 - [ ] Footer:
   - [ ] Calendar
