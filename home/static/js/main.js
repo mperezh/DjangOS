@@ -16,36 +16,56 @@ $(document).ready(function () {
     $("#memory-table").load("reports/memory-table/show");
     setTimeout(function() {
         $("#resources").load("reports/resources");
-
     }, 100);
 });
 
 $('.chrome-app').click(function () {
-    $("#desktop").load("apps/open/chrome");
-    $("#processes-table").load("reports/processes/add/chrome");
+
     $("#memory-table").load("reports/memory-table/add/chrome");
     setTimeout(function() {
-        $("#resources").load("reports/resources");
+        $("#processes-table").load("reports/processes/add/chrome");
     }, 100);
-    resizeDiv();
-});
 
-$('.calculator-app').click(function () {
-    $("#desktop").load("apps/open/calculator");
-    $("#processes-table").load("reports/processes/add/calculator");
-    $("#memory-table").load("reports/memory-table/add/calculator");
     setTimeout(function() {
         $("#resources").load("reports/resources");
     }, 100);
+
+    $("#desktop").load("apps/open/chrome");
     resizeDiv();
 });
 
 $('.folders-app').click(function () {
-    $("#desktop").load("apps/open/folders");
-    $("#processes-table").load("reports/processes/add/folders");
+
     $("#memory-table").load("reports/memory-table/add/folders");
+    setTimeout(function() {
+        $("#processes-table").load("reports/processes/add/folders");
+    }, 100);
+
     setTimeout(function() {
         $("#resources").load("reports/resources");
     }, 100);
+
+    $("#desktop").load("apps/open/folders");
     resizeDiv();
+});
+
+$('.calculator-app').click(function () {
+
+    $("#memory-table").load("reports/memory-table/add/calculator");
+    setTimeout(function() {
+        $("#processes-table").load("reports/processes/add/calculator");
+    }, 100);
+
+    setTimeout(function() {
+        $("#resources").load("reports/resources");
+    }, 100);
+
+    $("#desktop").load("apps/open/calculator");
+    resizeDiv();
+});
+
+$('#compact').click(function () {
+    setTimeout(function() {
+        $("#resources").load("/reports/memory-table/compact");
+    }, 100);
 });
