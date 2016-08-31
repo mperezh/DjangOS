@@ -2,10 +2,8 @@ from ast import literal_eval
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from home.models import (App, ProcessList,
-                         MemorySpace, MemoryTable)
+from home.models import (App, ProcessList, MemorySpace, MemoryTable)
 from django.db import IntegrityError
-# from collections import OrderedDict
 
 
 def index(request):
@@ -15,8 +13,9 @@ def index(request):
     MemoryTable.objects.all().delete()
 
     l = [1, 1, 1, 1, 1] + ([0] * 27)
-    m = MemoryTable(list=str(l), list_length=32)
-    m.save()
+
+    MemorySpace(app=App.objects.get(app_id="system"), start=0, length=5).save()
+    MemoryTable(list=str(l), list_length=32).save()
 
     return render(request, 'home/index.html')
 
@@ -110,7 +109,9 @@ def add_to_memory_table(request, app_id):
     first = True
     count = 0
     start = 0
-    if ProcessList.objects.filter(app=app).count() == 0:
+    c = ProcessList.objects.filter(app=app).count()
+    print(c)
+    if c == 0:
         for i in range(len(l)):
             if memory > 0:
                 if l[i] == 0:
@@ -122,13 +123,11 @@ def add_to_memory_table(request, app_id):
                     memory -= 1
                 if i < len(l) and count > 0:
                     if l[i + 1] != 0:
-                        m = MemorySpace(app=app, start=start, length=count)
-                        m.save()
+                        MemorySpace(app=app, start=start, length=count).save()
                         first = True
                         count = 0
             else:
-                m = MemorySpace(app=app, start=start, length=count)
-                m.save()
+                MemorySpace(app=app, start=start, length=count).save()
                 break
 
         memory_table.list = str(l)
@@ -155,6 +154,38 @@ def remove_from_memory_table(request, app_id):
     memory_table.save()
 
     MemorySpace.objects.filter(app=app).delete()
+
+    context = {
+        'list': l
+    }
+
+    rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)
+
+
+def compact_memory_table(request):
+    memory_table = MemoryTable.objects.first()
+    pages = MemorySpace.objects.all().order_by('app')
+    pages_count = MemorySpace.objects.all().count() - 1
+
+    l = [1, 1, 1, 1, 1] + ([0] * 27)
+    p = 0
+    i = 5
+
+    while i < len(l):
+        for j in range(pages[p].length):
+            l[i] = pages[p].app.id
+            i += 1
+        if p < pages_count:
+            p += 1
+        else:
+            break
+
+    memory_table.list = str(l)
+    memory_table.save()
+
+    MemorySpace.objects.all().delete()
+    MemorySpace(app=App.objects.get(app_id="system"), start=0, length=5).save()
 
     context = {
         'list': l

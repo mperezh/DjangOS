@@ -66,6 +66,6 @@ $('.calculator-app').click(function () {
 
 $('#compact').click(function () {
     setTimeout(function() {
-        $("#resources").load("/reports/memory-table/compact");
+        $("#memory-table").load("/reports/memory-table/compact");
     }, 100);
 });

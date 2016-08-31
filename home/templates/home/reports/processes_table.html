@@ -4,5 +4,9 @@
     <td>{{ process.app.app_id }}</td>
     <td>{{ process.app.cpu_use }}%</td>
     <td>{{ process.app.memory_use }} Mb</td>
+    <td>
+      <input type="checkbox" class="filled-in" id="{{ process.app.app_id }}-state" checked="checked"/>
+      <label for="{{ process.app.app_id }}-state"></label>
+    </td>
   </tr>
 {% endfor %}

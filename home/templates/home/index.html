@@ -90,6 +90,7 @@
                     <th>Proceso</th>
                     <th>CPU</th>
                     <th>RAM</th>
+                    <th>Estado</th>
                   </tr>
                   </thead>
                   <tbody id="processes-table">
@@ -97,9 +98,13 @@
                   </tbody>
                 </table>
                 <br>
-                <span class="mdl-layout-title center">Tabla de memoria</span>
+                <span class="mdl-layout-title center">
+                  Tabla de memoria
+                  <br><br>
+                 <a id="compact" class="waves-effect waves-light btn">Compactac&iacute;on</a>
+                </span>
                 <br>
-                <div id="" style="overflow-y: scroll; overflow-x:hidden; height:500px;">
+                <div style="overflow-y: scroll; overflow-x:hidden; height:500px; width: auto">
                   <div id="memory-table" class="row">
                     {% include "home/reports/memory_table.html" %}
                   </div>

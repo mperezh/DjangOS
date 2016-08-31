@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^reports/memory-table/show', views.show_memory_table, name="home"),
     url(r'^reports/memory-table/add/(?P<app_id>\w+)', views.add_to_memory_table, name="home"),
     url(r'^reports/memory-table/remove/(?P<app_id>\w+)', views.remove_from_memory_table, name="home"),
+    url(r'^reports/memory-table/compact', views.compact_memory_table, name="home"),
 ]
