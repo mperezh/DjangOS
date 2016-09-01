@@ -7,17 +7,19 @@ from django.db import IntegrityError
 
 
 def index(request):
-    # Clear processes
     ProcessList.objects.all().delete()
     MemorySpace.objects.all().delete()
     MemoryTable.objects.all().delete()
 
-    l = [1, 1, 1, 1, 1] + ([0] * 27)
+    l = [1] * 5 + [0] * 27
 
     MemorySpace(app=App.objects.get(app_id="system"), start=0, length=5).save()
-    MemoryTable(list=str(l), list_length=32).save()
+    MemoryTable(name="Ram", list=str(l), list_length=32).save()
+    MemoryTable(name="Swap", list=str([0] * 64), list_length=64).save()
 
-    return render(request, 'home/index.html')
+    apps = App.objects.all().exclude(app_id='system')
+
+    return render(request, 'home/index.html', {'apps': apps})
 
 
 def show_desktop(request):
@@ -77,7 +79,7 @@ def resources(request):
         memory_use += process.app.memory_use
         disk_use += process.app.disk_use
 
-    total_memory = MemoryTable.objects.first().list_length
+    total_memory = MemoryTable.objects.get(name="Ram").list_length
 
     context = {
         'cpu_use': cpu_use,
@@ -93,7 +95,7 @@ def resources(request):
 
 def show_memory_table(request):
     context = {
-        'list': literal_eval(MemoryTable.objects.first().list)
+        'list': literal_eval(MemoryTable.objects.get(name="Ram").list)
     }
 
     rendered = render_to_string('home/reports/memory_table.html', context)
@@ -103,13 +105,13 @@ def show_memory_table(request):
 def add_to_memory_table(request, app_id):
     app = App.objects.get(app_id=app_id)
     memory = app.memory_use
-    memory_table = MemoryTable.objects.first()
+    memory_table = MemoryTable.objects.get(name="Ram")
     l = literal_eval(memory_table.list)
     first = True
     count = 0
     start = 0
     c = ProcessList.objects.filter(app=app).count()
-    print(c)
+
     if c == 0:
         for i in range(len(l)):
             if memory > 0:
@@ -142,7 +144,7 @@ def add_to_memory_table(request, app_id):
 
 def remove_from_memory_table(request, app_id):
     app = App.objects.get(app_id=app_id)
-    memory_table = MemoryTable.objects.first()
+    memory_table = MemoryTable.objects.get(name="Ram")
     l = literal_eval(memory_table.list)
 
     for i in range(len(l)):
@@ -163,7 +165,7 @@ def remove_from_memory_table(request, app_id):
 
 
 def compact_memory_table(request):
-    memory_table = MemoryTable.objects.first()
+    memory_table = MemoryTable.objects.get(name="Ram")
     pages = MemorySpace.objects.all().exclude(app__app_id='system').order_by('app')
     pages_count = len(pages) - 1
 

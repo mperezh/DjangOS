@@ -21,11 +21,12 @@ class ProcessList(models.Model):
 
 
 class MemoryTable(models.Model):
+    name = models.CharField(max_length=60, default="")
     list = models.CharField(max_length=5000)
     list_length = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.list_length)
+        return str(self.name)
 
 
 class MemorySpace(models.Model):
