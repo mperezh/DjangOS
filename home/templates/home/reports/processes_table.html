@@ -5,8 +5,26 @@
     <td>{{ process.app.cpu_use }}%</td>
     <td>{{ process.app.memory_use }} Mb</td>
     <td>
-      <input type="checkbox" class="filled-in" id="{{ process.app.app_id }}-state" checked="checked"/>
+      <input type="checkbox" class="filled-in" id="{{ process.app.app_id }}-state"
+          {% if process.status %}
+             checked
+          {% endif %}
+
+          {% if process.app.app_id == "system" %}
+            disabled
+          {% endif %}
+      />
+
       <label for="{{ process.app.app_id }}-state"></label>
     </td>
   </tr>
+
+  <script>
+    $('#{{ process.app.app_id }}-state').click(function () {
+
+      setTimeout(function () {
+        $("#processes-table").load("reports/processes/status/{{ process.app.app_id }}");
+      }, 100);
+    });
+  </script>
 {% endfor %}

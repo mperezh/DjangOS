@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^apps/close/(?P<app_id>\w+)$', views.close_app, name="home"),
     url(r'^reports/processes/add/(?P<app_id>\w+)$', views.add_process, name="home"),
     url(r'^reports/processes/close/(?P<app_id>\w+)$', views.remove_process, name="home"),
+    url(r'^reports/processes/status/(?P<app_id>\w+)$', views.change_process_state, name="home"),
     url(r'^reports/resources$', views.resources, name="home"),
     url(r'^reports/memory-table/show', views.show_memory_table, name="home"),
     url(r'^reports/memory-table/add/(?P<app_id>\w+)', views.add_to_memory_table, name="home"),

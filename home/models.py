@@ -14,9 +14,10 @@ class App(models.Model):
 
 class ProcessList(models.Model):
     app = models.OneToOneField(App)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.app.app_name
+        return "{} Active: {}".format(self.app.app_name, self.status)
 
 
 class MemoryTable(models.Model):
