@@ -69,8 +69,8 @@ def remove_process(request, app_id):
 
 def resources(request):
     cpu_use = 0
-    memory_use = 0 
-    disk_use = 0 
+    memory_use = 0
+    disk_use = 0
 
     for process in ProcessList.objects.all():
         cpu_use += process.app.cpu_use
@@ -84,7 +84,7 @@ def resources(request):
         'memory_use': memory_use,
         'disk_use': disk_use,
         'total_memory': total_memory,
-        'p_memory_use': (memory_use*100)/total_memory
+        'p_memory_use': (memory_use * 100) / total_memory
     }
 
     rendered = render_to_string('home/reports/resources.html', context)
@@ -92,7 +92,6 @@ def resources(request):
 
 
 def show_memory_table(request):
-
     context = {
         'list': literal_eval(MemoryTable.objects.first().list)
     }
@@ -165,17 +164,22 @@ def remove_from_memory_table(request, app_id):
 
 def compact_memory_table(request):
     memory_table = MemoryTable.objects.first()
-    pages = MemorySpace.objects.all().order_by('app')
-    pages_count = MemorySpace.objects.all().count() - 1
+    pages = MemorySpace.objects.all().exclude(app__app_id='system').order_by('app')
+    pages_count = len(pages) - 1
 
-    l = [1, 1, 1, 1, 1] + ([0] * 27)
+    l = ([1] * 5 + [0] * 27)
     p = 0
     i = 5
 
     while i < len(l):
+        start = i
         for j in range(pages[p].length):
             l[i] = pages[p].app.id
             i += 1
+
+        MemorySpace(app=pages[p].app, start=start, length=pages[p].length).save()
+        pages[p].delete()
+
         if p < pages_count:
             p += 1
         else:
@@ -184,12 +188,24 @@ def compact_memory_table(request):
     memory_table.list = str(l)
     memory_table.save()
 
-    MemorySpace.objects.all().delete()
-    MemorySpace(app=App.objects.get(app_id="system"), start=0, length=5).save()
-
     context = {
         'list': l
     }
 
     rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)
+
+
+def change_process_state(request, app_id):
+
+    process = ProcessList.objects.get(app__app_id=app_id)
+
+    process.status = not process.status
+    process.save()
+
+    context = {
+        'processes_list': ProcessList.objects.all()
+    }
+
+    rendered = render_to_string('home/reports/processes_table.html', context)
     return HttpResponse(rendered)
