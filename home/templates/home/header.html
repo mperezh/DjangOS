@@ -38,5 +38,24 @@
 <script src="{% static 'js/time.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 
+  <script>
+    {% for app in apps %}
+      $('.{{ app.app_id }}-app').click(function () {
+
+        $("#memory-table").load("reports/memory-table/add/{{ app.app_id }}");
+        setTimeout(function () {
+          $("#processes-table").load("reports/processes/add/{{ app.app_id }}");
+        }, 100);
+
+        setTimeout(function () {
+          $("#resources").load("reports/resources");
+        }, 200);
+
+        $("#desktop").load("apps/open/{{ app.app_id }}");
+        resizeDiv();
+      });
+    {% endfor %}
+  </script>
+
 </body>
 </html>
