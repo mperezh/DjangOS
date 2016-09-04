@@ -12,10 +12,10 @@ def index(request):
     MemorySpace.objects.all().delete()
     MemoryTable.objects.all().delete()
 
-    l = [1] * 10 + [0] * 22
+    l = [1] * 10 + [0] * 54
 
-    MemorySpace(app=App.objects.get(app_id="system"), start=0, length=5).save()
-    MemoryTable(name="Ram", list=str(l), list_length=32).save()
+    MemorySpace(app=App.objects.get(app_id="system"), start=0, length=10).save()
+    MemoryTable(name="Ram", list=str(l), list_length=64).save()
     MemoryTable(name="Swap", list=str([0] * 64), list_length=64).save()
 
     apps = App.objects.all().exclude(app_id='system')
@@ -29,7 +29,6 @@ def show_desktop(request):
 
 
 def open_app(request, app_id):
-    # Make query here
     app = App.objects.get(app_id=app_id)
 
     context = {
@@ -103,15 +102,6 @@ def show_memory_table(request):
     return HttpResponse(rendered)
 
 
-def show_swap_table(request):
-    context = {
-        'list': literal_eval(MemoryTable.objects.get(name="Swap").list)
-    }
-
-    rendered = render_to_string('home/reports/memory_table.html', context)
-    return HttpResponse(rendered)
-
-
 def add_to_memory_table(request, app_id):
     app = App.objects.get(app_id=app_id)
     memory = app.memory_use
@@ -179,7 +169,7 @@ def compact_memory_table(request):
     pages = MemorySpace.objects.all().exclude(app__app_id='system').order_by('app')
     pages_count = len(pages) - 1
 
-    l = ([1] * 10 + [0] * 22)
+    l = ([1] * 10 + [0] * 54)
     p = 0
     i = 10
 
@@ -223,8 +213,8 @@ def change_process_state(request, app_id):
 
 
 def get_memory_available(request):
-    processes = ProcessList.objects.filter(status=True).aggregate(Sum('app__memory_use'))
-    return HttpResponse(32 - int(processes.get('app__memory_use__sum')))
+    processes = ProcessList.objects.all().aggregate(Sum('app__memory_use'))
+    return HttpResponse(64 - int(processes.get('app__memory_use__sum')))
 
 
 def get_memory_app(request, app_id):
@@ -233,9 +223,101 @@ def get_memory_app(request, app_id):
 
 
 def get_all_open_apps(request):
-    processes = ProcessList.objects.filter(status=True)
+    processes = ProcessList.objects.all()
     apps = str()
     for process in processes:
         apps += str(process.app.app_id) + " "
 
     return HttpResponse(apps)
+
+
+def get_disabled_processes(request):
+    return HttpResponse(ProcessList.objects.filter(status=False).count())
+
+
+def show_swap_table(request):
+    context = {
+        'list': literal_eval(MemoryTable.objects.get(name="Swap").list)
+    }
+
+    rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)
+
+
+def swap_out(request, app_id):
+    disabled_processes = ProcessList.objects.filter(status=False)
+    app = App.objects.get(app_id=app_id)
+    needed_memory = app.memory_use - (64 - int(ProcessList.objects.all().aggregate(Sum('app__memory_use')).get(
+        'app__memory_use__sum')))
+
+    swap_table = MemoryTable.objects.get(name="Swap")
+    swap_list = literal_eval(swap_table.list)
+
+    ram_table = MemoryTable.objects.get(name="Ram")
+    ram_list = literal_eval(ram_table.list)
+
+    apps_to_swap_out = set()
+
+    for process in disabled_processes:
+        if needed_memory > 0:
+            needed_memory -= process.app.memory_use
+            apps_to_swap_out.add(process.app)
+
+    """
+    def compact_memory_table(request):
+        memory_table = MemoryTable.objects.get(name="Ram")
+        pages = MemorySpace.objects.all().exclude(app__app_id='system').order_by('app')
+        pages_count = len(pages) - 1
+
+        l = ([1] * 10 + [0] * 22)
+        p = 0
+        i = 10
+
+        while i < len(l):
+            start = i
+            for j in range(pages[p].length):
+                l[i] = pages[p].app.id
+                i += 1
+
+            MemorySpace(app=pages[p].app, start=start, length=pages[p].length).save()
+            pages[p].delete()
+
+            if p < pages_count:
+                p += 1
+            else:
+                break
+
+        memory_table.list = str(l)
+        memory_table.save()
+
+        context = {
+            'list': l
+        }
+    """
+
+    context = {
+        'list': swap_list
+    }
+
+    rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)
+
+
+def swap_in(request, app_id):
+    pages = MemorySpace.objects.filter(app__processlist__status=False)
+    for page in pages:
+        print(page.app.app_id)
+
+    return HttpResponse(str(pages))
+
+
+"""
+10 apps
+disco:
+    Asociar pos de discos a cada app
+    Generar un vector con las apps abiertas con cada pos de disco
+    Aplicar los algoirimos a ese vector
+    Mostrar vector resultante
+
+
+"""

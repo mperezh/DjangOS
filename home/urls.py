@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^reports/processes/add/(?P<app_id>\w+)$', views.add_process, name="home"),
     url(r'^reports/processes/close/(?P<app_id>\w+)$', views.remove_process, name="home"),
     url(r'^reports/processes/status/(?P<app_id>\w+)$', views.change_process_state, name="home"),
+    url(r'^reports/processes/disabled', views.get_disabled_processes, name="home"),
     url(r'^reports/resources$', views.resources, name="home"),
     url(r'^reports/resources/memory', views.get_memory_available, name="home"),
     url(r'^reports/memory-table/show', views.show_memory_table, name="home"),
@@ -18,4 +19,6 @@ urlpatterns = [
     url(r'^reports/memory-table/remove/(?P<app_id>\w+)', views.remove_from_memory_table, name="home"),
     url(r'^reports/memory-table/compact', views.compact_memory_table, name="home"),
     url(r'^reports/swap-table/show', views.show_swap_table, name="home"),
+    url(r'^reports/swap-table/out/(?P<app_id>\w+)', views.swap_out, name="home"),
+    url(r'^reports/swap-table/in/(?P<app_id>\w+)', views.swap_in, name="home"),
 ]

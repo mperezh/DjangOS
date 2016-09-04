@@ -87,7 +87,22 @@
             $("#desktop").load("apps/open/{{ app.app_id }}");
             resizeDiv();
           } else {
-            Materialize.toast('Memoria insuficiente', 4000);
+            var disabled_processes_count = 0;
+            $.ajax({
+              url: "reports/processes/disabled",
+              success: function (result) {
+                disabled_processes_count = +result;
+              }
+            });
+
+            if (disabled_processes_count > 0) {
+              $("#swap-table").load("reports/swap-table/out/{{ app.app_id }}");
+              setTimeout(function () {
+                $("#memory-table").load("reports/memory-table/show");
+              }, 100);
+            }
+            else
+              Materialize.toast('Memoria insuficiente', 2000);
           }
         }
       }, 150);
