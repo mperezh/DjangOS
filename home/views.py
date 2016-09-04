@@ -103,6 +103,15 @@ def show_memory_table(request):
     return HttpResponse(rendered)
 
 
+def show_swap_table(request):
+    context = {
+        'list': literal_eval(MemoryTable.objects.get(name="Swap").list)
+    }
+
+    rendered = render_to_string('home/reports/memory_table.html', context)
+    return HttpResponse(rendered)
+
+
 def add_to_memory_table(request, app_id):
     app = App.objects.get(app_id=app_id)
     memory = app.memory_use
@@ -172,7 +181,7 @@ def compact_memory_table(request):
 
     l = ([1] * 10 + [0] * 22)
     p = 0
-    i = 5
+    i = 10
 
     while i < len(l):
         start = i
@@ -229,5 +238,4 @@ def get_all_open_apps(request):
     for process in processes:
         apps += str(process.app.app_id) + " "
 
-    print(apps)
     return HttpResponse(apps)

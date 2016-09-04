@@ -60,12 +60,12 @@
         </div>
       </footer>
     </div>
-    <div class="mdl-cell mdl-cell--4-col">
+    <div id="admin-panel" class="mdl-cell mdl-cell--4-col">
       <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
         <header class="mdl-layout__header">
           <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Administrador</span>
+            <span class="mdl-layout-title">Panel de administrador</span>
           </div>
           <!-- Tabs -->
           <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
@@ -111,8 +111,15 @@
                  <a id="compact" class="waves-effect waves-light btn indigo">Compactac&iacute;on</a>
                 </span>
                 <br>
-                <div style="overflow-y: scroll; overflow-x:hidden; height:500px; width: auto">
+                <div>
                   <div id="memory-table" class="row">
+                    {% include "home/reports/memory_table.html" %}
+                  </div>
+                </div>
+                <span class="mdl-layout-title center">Swap</span>
+                <br>
+                <div>
+                  <div id="swap-table" class="row">
                     {% include "home/reports/memory_table.html" %}
                   </div>
                 </div>

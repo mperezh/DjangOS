@@ -154,50 +154,40 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
-.custom-grid { padding: 0 !important;}
-.desktop-cell { margin: 0 !important;}
+.custom-grid { padding: 0 !important; }
+.desktop-cell {
+    margin: 0 !important;
+    position: fixed;
+}
+#admin-panel{
+    float: left;
+    position: relative;
+    left: 66%;
+}
 #desktop-background {
     background-size:100%;
     width: 100%;
     background: url("../img/background1.png") no-repeat;
     position: relative;
 }
-
 #program-window {
     width: 100%;
     position: relative;
-
 }
-
-.demo-list-two {
-    width: 300px;
-}
-
+.demo-list-two { width: 300px; }
 #status-bar{
     background-color: #424242;
     color: #9e9e9e;
     height: 32px;
     text-align: center;
 }
-
-#status-bar button{
-    float: right;
-}
-
-#program-name{
-    display: inline-block;
-}
-
-#program{
-
-    position: relative;
-}
-
+#status-bar button{ float: right; }
+#program-name{ display: inline-block; }
+#program{ position: relative; }
 #program img {
     width: 100%;
     height: 100%;
 }
-
 .mdl-mini-footer { padding: 5px 16px; }
 .mdl-logo { line-height: 0 !important;}
 .mdl-layout__header-row { padding: 0 40px 0 20px !important;}
