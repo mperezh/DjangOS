@@ -7,9 +7,10 @@ class App(models.Model):
     cpu_use = models.IntegerField(default=0)
     memory_use = models.IntegerField(default=0)
     disk_use = models.IntegerField(default=0)
+    disk_position = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.app_name
+        return self.app_id
 
 
 class ProcessList(models.Model):
