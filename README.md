@@ -16,8 +16,9 @@
   - [x] ~~Minimize~~
   - [x] ~~Close~~
   - [x] ~~Memory table~~
-  - [ ] Compaction
+  - [x] ~~Compaction~~
   - [ ] Swap
+  - [ ] Disk
 - [ ] Footer:
   - [ ] Calendar
   - [ ] LAN/WLAN connection

@@ -30,32 +30,69 @@
 
 {% block content %}{% endblock %}
 
-
 <script src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
 <script src="{% static 'js/materialize.min.js' %}"></script>
 <script src="{% static 'js/material.min.js' %}"></script>
 <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
 <script src="{% static 'js/time.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+<script>
+  {% for app in apps %}
+    $('.{{ app.app_id }}-app').click(function () {
 
-  <script>
-    {% for app in apps %}
-      $('.{{ app.app_id }}-app').click(function () {
+      var free_memory = 0;
+      var memory_needed = 0;
+      var open_apps = "";
 
-        $("#memory-table").load("reports/memory-table/add/{{ app.app_id }}");
-        setTimeout(function () {
-          $("#processes-table").load("reports/processes/add/{{ app.app_id }}");
-        }, 100);
-
-        setTimeout(function () {
-          $("#resources").load("reports/resources");
-        }, 200);
-
-        $("#desktop").load("apps/open/{{ app.app_id }}");
-        resizeDiv();
+      $.ajax({
+        url: "/reports/resources/memory",
+        success: function (result) {
+          free_memory = +result;
+        }
       });
-    {% endfor %}
-  </script>
 
+      $.ajax({
+        url: "/apps/get/memory/{{ app.app_id }}",
+        success: function (result) {
+          memory_needed = +result;
+        }
+      });
+
+      $.ajax({
+        url: "/apps/all",
+        success: function (result) {
+          open_apps = result;
+        }
+      });
+
+      setTimeout(function () {
+
+        if (free_memory >= memory_needed) {
+
+          $("#memory-table").load("reports/memory-table/add/{{ app.app_id }}");
+          setTimeout(function () {
+            $("#processes-table").load("reports/processes/add/{{ app.app_id }}");
+          }, 100);
+
+          setTimeout(function () {
+            $("#resources").load("reports/resources");
+          }, 200);
+
+          $("#desktop").load("apps/open/{{ app.app_id }}");
+          resizeDiv();
+
+        } else {
+
+          if (open_apps.indexOf("{{ app.app_id }}") != -1) {
+            $("#desktop").load("apps/open/{{ app.app_id }}");
+            resizeDiv();
+          } else {
+            Materialize.toast('Memoria insuficiente', 4000);
+          }
+        }
+      }, 150);
+    });
+  {% endfor %}
+</script>
 </body>
 </html>

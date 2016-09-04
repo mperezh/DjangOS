@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from home.models import (App, ProcessList, MemorySpace, MemoryTable)
 from django.db import IntegrityError
+from django.db.models import Sum
 
 
 def index(request):
@@ -11,7 +12,7 @@ def index(request):
     MemorySpace.objects.all().delete()
     MemoryTable.objects.all().delete()
 
-    l = [1] * 5 + [0] * 27
+    l = [1] * 10 + [0] * 22
 
     MemorySpace(app=App.objects.get(app_id="system"), start=0, length=5).save()
     MemoryTable(name="Ram", list=str(l), list_length=32).save()
@@ -169,7 +170,7 @@ def compact_memory_table(request):
     pages = MemorySpace.objects.all().exclude(app__app_id='system').order_by('app')
     pages_count = len(pages) - 1
 
-    l = ([1] * 5 + [0] * 27)
+    l = ([1] * 10 + [0] * 22)
     p = 0
     i = 5
 
@@ -199,11 +200,10 @@ def compact_memory_table(request):
 
 
 def change_process_state(request, app_id):
-
-    process = ProcessList.objects.get(app__app_id=app_id)
-
-    process.status = not process.status
-    process.save()
+    if app_id != "system":
+        process = ProcessList.objects.get(app__app_id=app_id)
+        process.status = not process.status
+        process.save()
 
     context = {
         'processes_list': ProcessList.objects.all()
@@ -211,3 +211,23 @@ def change_process_state(request, app_id):
 
     rendered = render_to_string('home/reports/processes_table.html', context)
     return HttpResponse(rendered)
+
+
+def get_memory_available(request):
+    processes = ProcessList.objects.filter(status=True).aggregate(Sum('app__memory_use'))
+    return HttpResponse(32 - int(processes.get('app__memory_use__sum')))
+
+
+def get_memory_app(request, app_id):
+    app = App.objects.get(app_id=app_id)
+    return HttpResponse(app.memory_use)
+
+
+def get_all_open_apps(request):
+    processes = ProcessList.objects.filter(status=True)
+    apps = str()
+    for process in processes:
+        apps += str(process.app.app_id) + " "
+
+    print(apps)
+    return HttpResponse(apps)
