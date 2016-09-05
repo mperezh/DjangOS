@@ -238,7 +238,7 @@ def get_all_open_apps(request):
 
 
 def get_disabled_processes(request):
-    print(ProcessList.objects.filter(status=False).count())
+    # print(ProcessList.objects.filter(status=False).count())
     return HttpResponse(ProcessList.objects.filter(status=False).count())
 
 
@@ -254,7 +254,6 @@ def show_swap_table(request):
 def swap_out(request, app_id):
     disabled_processes = ProcessList.objects.filter(status=False)
     app = App.objects.get(app_id=app_id)
-    memory = app.memory_use
     needed_memory = app.memory_use - (64 - int(ProcessList.objects.all().aggregate(Sum('app__memory_use')).get(
         'app__memory_use__sum')))
 
@@ -281,14 +280,6 @@ def swap_out(request, app_id):
             MemorySpace.objects.filter(app=p).delete()
         break
 
-    # for i in range(len(swap_list)):
-    #     if memory > 0:
-    #         if swap_list[i] == 0:
-    #             swap_list[i] = app.id
-    #             memory -= 1
-    #     else:
-    #         break
-
     swap_table.list = swap_list
     swap_table.save()
 
@@ -298,76 +289,6 @@ def swap_out(request, app_id):
 
     ram_table.list = ram_list
     ram_table.save()
-
-    # ProcessList.objects.filter(app=app).delete()
-
-    """
-    def compact_memory_table(request):
-        memory_table = MemoryTable.objects.get(name="Ram")
-        pages = MemorySpace.objects.all().exclude(app__app_id='system').order_by('app')
-        pages_count = len(pages) - 1
-
-        l = ([1] * 10 + [0] * 22)
-        p = 0
-        i = 10
-
-        while i < len(l):
-            start = i
-            for j in range(pages[p].length):
-                l[i] = pages[p].app.id
-                i += 1
-
-            MemorySpace(app=pages[p].app, start=start, length=pages[p].length).save()
-            pages[p].delete()
-
-            if p < pages_count:
-                p += 1
-            else:
-                break
-
-        memory_table.list = str(l)
-        memory_table.save()
-
-        context = {
-            'list': l
-        }
-
-    def add_to_memory_table(request, app_id):
-        app = App.objects.get(app_id=app_id)
-        memory = app.memory_use
-        memory_table = MemoryTable.objects.get(name="Ram")
-        l = literal_eval(memory_table.list)
-        first = True
-        count = 0
-        start = 0
-        c = ProcessList.objects.filter(app=app).count()
-
-        if c == 0:
-            for i in range(len(l)):
-                if memory > 0:
-                    if l[i] == 0:
-                        if first:
-                            start = i
-                            first = False
-                        l[i] = app.id
-                        count += 1
-                        memory -= 1
-                    if i < len(l) - 1 and count > 0:
-                        if l[i + 1] != 0:
-                            MemorySpace(app=app, start=start, length=count).save()
-                            first = True
-                            count = 0
-                    if i == len(l) - 1 and count > 0:
-                        MemorySpace(app=app, start=start, length=count).save()
-                        first = True
-                        count = 0
-                else:
-                    MemorySpace(app=app, start=start, length=count).save()
-                    break
-
-            memory_table.list = str(l)
-            memory_table.save()
-    """
 
     context = {
         'list': swap_list
@@ -459,13 +380,3 @@ def apply_cscan(request):
 
     rendered = render_to_string('home/reports/disk_vector.html', context)
     return HttpResponse(rendered)
-
-"""
-disco:
-    Asociar pos de discos a cada app
-    Generar un vector con las apps abiertas con cada pos de disco
-    Aplicar los algoirimos a ese vector
-    Mostrar vector resultante
-
-
-"""

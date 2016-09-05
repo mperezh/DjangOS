@@ -98,9 +98,18 @@
               }
             });
             console.log(disabled_processes_count);
-             setTimeout(function () {
+            setTimeout(function () {
               if (disabled_processes_count > 0) {
-                $("#swap-table").load("reports/swap-table/out/{{ app.app_id }}");
+
+                setTimeout(function () {
+                  $("#swap-table").load("reports/swap-table/out/{{ app.app_id }}");
+                }, 100);
+
+                setTimeout(function () {
+                  $("#memory-table").load("reports/memory-table/add/{{ app.app_id }}");
+                  console.log("reports/memory-table/add/{{ app.app_id }}");
+                }, 200);
+
                 setTimeout(function () {
                   $("#processes-table").load("reports/processes/add/{{ app.app_id }}");
                 }, 100);
@@ -110,10 +119,6 @@
                   $("#disk-vector").load("reports/resources/disk");
                 }, 200);
 
-                setTimeout(function () {
-                  //$("#memory-table").load("reports/memory-table/show");
-                  $("#memory-table").load("reports/memory-table/add/{{ app.app_id }}");
-                }, 200);
 
                 $("#desktop").load("apps/open/{{ app.app_id }}");
                 resizeDiv();
