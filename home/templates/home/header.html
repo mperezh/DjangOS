@@ -76,6 +76,7 @@
 
           setTimeout(function () {
             $("#resources").load("reports/resources");
+            $("#disk-vector").load("reports/resources/disk");
           }, 200);
 
           $("#desktop").load("apps/open/{{ app.app_id }}");
@@ -92,17 +93,33 @@
               url: "reports/processes/disabled",
               success: function (result) {
                 disabled_processes_count = +result;
+                alert(disabled_processes_count);
               }
             });
-
+            alert(disabled_processes_count);
             if (disabled_processes_count > 0) {
+
               $("#swap-table").load("reports/swap-table/out/{{ app.app_id }}");
               setTimeout(function () {
-                $("#memory-table").load("reports/memory-table/show");
+                $("#processes-table").load("reports/processes/add/{{ app.app_id }}");
               }, 100);
+
+              setTimeout(function () {
+                $("#resources").load("reports/resources");
+                $("#disk-vector").load("reports/resources/disk");
+              }, 200);
+
+              setTimeout(function () {
+                //$("#memory-table").load("reports/memory-table/show");
+                $("#memory-table").load("reports/memory-table/add/{{ app.app_id }}");
+              }, 200);
+
+              $("#desktop").load("apps/open/{{ app.app_id }}");
+              resizeDiv();
             }
-            else
+            else {
               Materialize.toast('Memoria insuficiente', 2000);
+            }
           }
         }
       }, 150);

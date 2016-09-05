@@ -5,6 +5,8 @@ from django.template.loader import render_to_string
 from home.models import (App, ProcessList, MemorySpace, MemoryTable)
 from django.db import IntegrityError
 from django.db.models import Sum
+from home.disk import fifo, scan, cscan
+from random import randint
 
 
 def index(request):
@@ -122,11 +124,15 @@ def add_to_memory_table(request, app_id):
                     l[i] = app.id
                     count += 1
                     memory -= 1
-                if i < len(l) and count > 0:
+                if i < len(l) - 1 and count > 0:
                     if l[i + 1] != 0:
                         MemorySpace(app=app, start=start, length=count).save()
                         first = True
                         count = 0
+                if i == len(l) - 1 and count > 0:
+                    MemorySpace(app=app, start=start, length=count).save()
+                    first = True
+                    count = 0
             else:
                 MemorySpace(app=app, start=start, length=count).save()
                 break
@@ -232,6 +238,7 @@ def get_all_open_apps(request):
 
 
 def get_disabled_processes(request):
+    print(ProcessList.objects.filter(status=False).count())
     return HttpResponse(ProcessList.objects.filter(status=False).count())
 
 
@@ -247,6 +254,7 @@ def show_swap_table(request):
 def swap_out(request, app_id):
     disabled_processes = ProcessList.objects.filter(status=False)
     app = App.objects.get(app_id=app_id)
+    memory = app.memory_use
     needed_memory = app.memory_use - (64 - int(ProcessList.objects.all().aggregate(Sum('app__memory_use')).get(
         'app__memory_use__sum')))
 
@@ -261,7 +269,37 @@ def swap_out(request, app_id):
     for process in disabled_processes:
         if needed_memory > 0:
             needed_memory -= process.app.memory_use
-            apps_to_swap_out.add(process.app)
+            apps_to_swap_out.add(process.app.id)
+
+    i = 0
+    while i < len(swap_list):
+        for p in apps_to_swap_out:
+            for j in range(App.objects.get(id=p).memory_use):
+                if swap_list[i] == 0:
+                    swap_list[i] = p
+                i += 1
+            MemorySpace.objects.filter(app=p).delete()
+        break
+
+    # for i in range(len(swap_list)):
+    #     if memory > 0:
+    #         if swap_list[i] == 0:
+    #             swap_list[i] = app.id
+    #             memory -= 1
+    #     else:
+    #         break
+
+    swap_table.list = swap_list
+    swap_table.save()
+
+    for i in range(len(ram_list)):
+        if ram_list[i] in apps_to_swap_out:
+            ram_list[i] = 0
+
+    ram_table.list = ram_list
+    ram_table.save()
+
+    # ProcessList.objects.filter(app=app).delete()
 
     """
     def compact_memory_table(request):
@@ -293,6 +331,42 @@ def swap_out(request, app_id):
         context = {
             'list': l
         }
+
+    def add_to_memory_table(request, app_id):
+        app = App.objects.get(app_id=app_id)
+        memory = app.memory_use
+        memory_table = MemoryTable.objects.get(name="Ram")
+        l = literal_eval(memory_table.list)
+        first = True
+        count = 0
+        start = 0
+        c = ProcessList.objects.filter(app=app).count()
+
+        if c == 0:
+            for i in range(len(l)):
+                if memory > 0:
+                    if l[i] == 0:
+                        if first:
+                            start = i
+                            first = False
+                        l[i] = app.id
+                        count += 1
+                        memory -= 1
+                    if i < len(l) - 1 and count > 0:
+                        if l[i + 1] != 0:
+                            MemorySpace(app=app, start=start, length=count).save()
+                            first = True
+                            count = 0
+                    if i == len(l) - 1 and count > 0:
+                        MemorySpace(app=app, start=start, length=count).save()
+                        first = True
+                        count = 0
+                else:
+                    MemorySpace(app=app, start=start, length=count).save()
+                    break
+
+            memory_table.list = str(l)
+            memory_table.save()
     """
 
     context = {
@@ -311,8 +385,82 @@ def swap_in(request, app_id):
     return HttpResponse(str(pages))
 
 
+def get_disk_positions(request):
+    processes = ProcessList.objects.all().reverse()
+
+    disk_pos = list()
+
+    for process in processes:
+        disk_pos.append(process.app.disk_position)
+
+    context = {
+        'v': disk_pos
+    }
+
+    rendered = render_to_string('home/reports/disk_vector.html', context)
+    return HttpResponse(rendered)
+
+
+def apply_fifo(request):
+    processes = ProcessList.objects.all().reverse()
+
+    disk_pos = list()
+    i = randint(0, 200)
+
+    for process in processes:
+        disk_pos.append(process.app.disk_position)
+
+    v, a = fifo(disk_pos, i)
+
+    context = {
+        'v': v,
+        'start': i
+    }
+
+    rendered = render_to_string('home/reports/disk_vector.html', context)
+    return HttpResponse(rendered)
+
+
+def apply_scan(request):
+    processes = ProcessList.objects.all().reverse()
+
+    disk_pos = list()
+    i = randint(0, 200)
+
+    for process in processes:
+        disk_pos.append(process.app.disk_position)
+
+    v, a = scan(disk_pos, i)
+
+    context = {
+        'v': v,
+        'start': i
+    }
+
+    rendered = render_to_string('home/reports/disk_vector.html', context)
+    return HttpResponse(rendered)
+
+
+def apply_cscan(request):
+    processes = ProcessList.objects.all().reverse()
+
+    disk_pos = list()
+    i = randint(0, 200)
+
+    for process in processes:
+        disk_pos.append(process.app.disk_position)
+
+    v, a = cscan(disk_pos, i)
+
+    context = {
+        'v': v,
+        'start': i
+    }
+
+    rendered = render_to_string('home/reports/disk_vector.html', context)
+    return HttpResponse(rendered)
+
 """
-10 apps
 disco:
     Asociar pos de discos a cada app
     Generar un vector con las apps abiertas con cada pos de disco

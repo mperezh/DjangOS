@@ -18,6 +18,7 @@
             $("#memory-table").load("reports/memory-table/remove/{{ app_id }}");
             setTimeout(function() {
                 $("#resources").load("reports/resources");
+                $("#disk-vector").load("reports/resources/disk");
             }, 100);
             $("#desktop").load("desktop");
         });

@@ -35,5 +35,8 @@ class MemorySpace(models.Model):
     start = models.IntegerField(default=0)
     length = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['start']
+
     def __str__(self):
         return "{}, {}, {}".format(self.app.app_id, self.start, self.length)

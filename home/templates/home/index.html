@@ -124,7 +124,29 @@
             </div>
           </section>
           <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-            <div class="page-content"><!-- Your content goes here --></div>
+            <div class="page-content">
+              <span class="mdl-layout-title center"><br>Vector de disco<br><br></span>
+              <div id="disk-vector" class="center-align text-center">
+                {% include "home/reports/disk_vector.html" %}
+              </div>
+              <span class="mdl-layout-title center"><br>
+                Algoritmos de planificaci&oacute;n de disco
+                <br><br>
+              </span>
+              <a id="fifo-btn" class="waves-effect waves-light btn indigo">FIFO</a>
+              <div id="fifo">
+
+              </div><br>
+              <a id="scan-btn" class="waves-effect waves-light btn indigo">SCAN</a>
+              <div id="scan">
+
+              </div><br>
+              <a id="cscan-btn" class="waves-effect waves-light btn indigo">CSCAN</a>
+              <div id="csan">
+
+              </div>
+
+            </div>
           </section>
         </main>
       </div>
